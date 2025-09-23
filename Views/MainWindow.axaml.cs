@@ -55,13 +55,13 @@ public partial class MainWindow : Window
             _timer.Stop();
         }
 
-        double newX = Lerp(_startX, _endX, _t);
-        double newY = Lerp(_startY, _endY, _t);
+        var newX = Lerp(_startX, _endX, _t);
+        var newY = Lerp(_startY, _endY, _t);
         
         MoveSymbolTo(newX, newY);
     }
 
-    private double Lerp(double start, double end, double t) => start + (end - start) * t;
+    private static double Lerp(double start, double end, double t) => start + (end - start) * t;
 
     private void MoveSymbolTo(double x, double y)
     {
