@@ -20,17 +20,17 @@ public partial class MainWindow : Window
 
     private void Button_OnClick(object sender, RoutedEventArgs e)
     {
-        MoveCircle(200, 150);
+        MoveSymbol(200, 150);
     }
 
-    private void MoveCircle(double xOffset, double yOffset)
+    private void MoveSymbol(double xOffset, double yOffset)
     {
-        var x = MyCircle.GetValue(Canvas.LeftProperty);
-        var y = MyCircle.GetValue(Canvas.TopProperty);
+        var x = MySymbol.GetValue(Canvas.LeftProperty);
+        var y = MySymbol.GetValue(Canvas.TopProperty);
         StartLerp(x, y, x + xOffset, y + yOffset);
     }
-    
-    public void StartLerp(double fromX, double fromY, double toX, double toY)
+
+    private void StartLerp(double fromX, double fromY, double toX, double toY)
     {
         _startX = fromX;
         _startY = fromY;
@@ -58,21 +58,15 @@ public partial class MainWindow : Window
         double newX = Lerp(_startX, _endX, _t);
         double newY = Lerp(_startY, _endY, _t);
         
-        MoveCircleTo(newX, newY);
-        MoveImageTo(newX, newY);
+        MoveSymbolTo(newX, newY);
     }
 
     private double Lerp(double start, double end, double t) => start + (end - start) * t;
 
-    private void MoveCircleTo(double x, double y)
+    private void MoveSymbolTo(double x, double y)
     {
-        MyCircle.SetValue(Canvas.LeftProperty, x);
-        MyCircle.SetValue(Canvas.TopProperty, y);
+        MySymbol.SetValue(Canvas.LeftProperty, x);
+        MySymbol.SetValue(Canvas.TopProperty, y);
     }
-    
-    private void MoveImageTo(double x, double y)
-    {
-        MyImage.SetValue(Canvas.LeftProperty, x);
-        MyImage.SetValue(Canvas.TopProperty, y);
-    }
+
 }
