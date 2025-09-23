@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
+using Avalonia.Media;
 
 namespace ElevatorSimulator.Views;
 
@@ -11,6 +15,27 @@ public partial class MainWindow : Window
     private double _startX, _startY, _endX, _endY, _t;
     private const double Duration = 1.0; // seconds
     private const double Interval = 0.016; // ~60 FPS
+
+
+
+    private Point[] spawn = new Point[]
+    {
+        new Point(200, 100),
+        new Point(200, 200),
+        new Point(200, 300),
+        new Point(200, 400)
+    };
+    
+    private Point[] queue = new Point[]
+    {
+        new Point(400, 100),
+        new Point(400, 200),
+        new Point(400, 300),
+        new Point(400, 400)
+    };
+    
+    List<Ellipse> circles = new List<Ellipse>();
+    
     
     public MainWindow()
     {
@@ -20,53 +45,72 @@ public partial class MainWindow : Window
 
     private void Button_OnClick(object sender, RoutedEventArgs e)
     {
-        MoveSymbol(200, 150);
+        Random rnd = new Random();
+        int etage = rnd.Next(0, 4);
+
+        var circle = new Ellipse() { Width = 50, Height = 50, Fill = Brushes.MintCream };
+        
+        Canvas.SetLeft(circle, spawn[etage].X);
+        Canvas.SetTop(circle, spawn[etage].Y);
+        MySymbol.Children.Add(circle);
+        circles.Add(circle);
+        MoveSymbol(circle, queue[etage]);
     }
 
-    private void MoveSymbol(double xOffset, double yOffset)
+    private void MoveSymbol(Ellipse circle, Point goal)
     {
-        var x = MySymbol.GetValue(Canvas.LeftProperty);
-        var y = MySymbol.GetValue(Canvas.TopProperty);
-        StartLerp(x, y, x + xOffset, y + yOffset);
+        double x = Canvas.GetLeft(circle);
+        double y = Canvas.GetTop(circle);
+        StartLerp(circle, x, y, goal.X, goal.Y);
     }
 
-    private void StartLerp(double fromX, double fromY, double toX, double toY)
+    private void StartLerp(Ellipse circle, double fromX, double fromY, double toX, double toY)
     {
+        
+        double t = 0;
+        double duration = 1000.0;       // Dauer in Sekunden?
+        double interval = 0.016;        // ~60 FPS
+        
+        
         _startX = fromX;
         _startY = fromY;
         _endX = toX;
         _endY = toY;
         _t = 0;
 
-        _timer = new DispatcherTimer
+        var timer = new DispatcherTimer
         {
             Interval = TimeSpan.FromSeconds(Interval)
         };
-        _timer.Tick += OnLerpTick;
+        
+        _timer.Tick += (spawn, e) =>
+        {
+            
+            
+            t += interval / duration;
+            if (t >= 1)
+            {
+                t = 1;
+                timer.Stop();
+                // Kreis entfernen, wenn Ziel erreicht
+                MySymbol.Children.Remove(circle);
+                circles.Remove(circle);
+            }
+            else
+            {
+                Console.WriteLine(t);
+            }
+
+            double newX = Lerp(fromX, toX, t);
+            double newY = Lerp(fromY, toY, t);
+
+            Canvas.SetLeft(circle, newX);
+            Canvas.SetTop(circle, newY);
+        };
+        
         _timer.Start();
     }
 
-    private void OnLerpTick(object sender, EventArgs e)
-    {
-        _t += Interval / Duration;
-        if (_t >= 1)
-        {
-            _t = 1;
-            _timer.Stop();
-        }
-
-        var newX = Lerp(_startX, _endX, _t);
-        var newY = Lerp(_startY, _endY, _t);
-        
-        MoveSymbolTo(newX, newY);
-    }
-
     private static double Lerp(double start, double end, double t) => start + (end - start) * t;
-
-    private void MoveSymbolTo(double x, double y)
-    {
-        MySymbol.SetValue(Canvas.LeftProperty, x);
-        MySymbol.SetValue(Canvas.TopProperty, y);
-    }
-
+    
 }

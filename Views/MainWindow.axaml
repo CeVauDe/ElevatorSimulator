@@ -22,12 +22,12 @@
             <Canvas x:Name="MySymbol"
                     Canvas.Left="100"
                     Canvas.Top="100">
-                <Ellipse x:Name="DvdBackground"
+                <!--  <Ellipse x:Name="DvdBackground"
                          Width="50" Height="50"
                          Fill="MintCream"/>
                 <Image x:Name="DvdImage"
                        Width="50" Height="50"
-                       Source="avares://ElevatorSimulator/Assets/DVD_logo.svg.png"/>
+                       Source="avares://ElevatorSimulator/Assets/DVD_logo.svg.png"/> -->
             </Canvas>
             
         </Canvas>
