@@ -15,13 +15,13 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     
-    <!-- <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
     <StackPanel>
-        <Button Click="Button_OnClick">Calculate</Button>
+        <Button Command="{Binding MoveSymbolCommand}" 
+                IsEnabled="{Binding !IsAnimating}">Calculate</Button>
         <Canvas x:Name="MainCanvas">
             <Canvas x:Name="MySymbol"
-                    Canvas.Left="100"
-                    Canvas.Top="100">
+                    Canvas.Left="{Binding SymbolX}"
+                    Canvas.Top="{Binding SymbolY}">
                 <Ellipse x:Name="DvdBackground"
                          Width="50" Height="50"
                          Fill="MintCream"/>

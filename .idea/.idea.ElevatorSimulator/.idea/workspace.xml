@@ -8,7 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53fc2d0a-5e25-4cb0-827e-4161f6e542d9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Models/AnimatedSymbol.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/AnimationService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ElevatorSimulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ElevatorSimulator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ElevatorSimulator.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ElevatorSimulator.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" afterDir="false" />
     </list>
@@ -42,10 +46,21 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/obj/project.assets.json.bck" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file:///tmp/JetBrainsPerUserTemp-1000-1/SourceGeneratedDocuments/9E1DAFD4484166796F9D2851/Avalonia.Generators/Avalonia.Generators.NameGenerator.AvaloniaNameSourceGenerator/ElevatorSimulator.Views.MainWindow.g.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/fd6843291c494dcf98f81205c7f337ef1f9000/aa/cef02e35/InputElement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Models/AnimatedSymbol.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Models/AnimationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/ViewModels/MainWindowViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/ViewModels/MainWindowViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/Views/MainWindow.axaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/Views/MainWindow.axaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/Views/MainWindow.axaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/Views/MainWindow.axaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file:///tmp/JetBrainsPerUserTemp-1000-1/SourceGeneratedDocuments/9E1DAFD4484166796F9D2851/CommunityToolkit.Mvvm.SourceGenerators/CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator/ElevatorSimulator.ViewModels.MainWindowViewModel.g.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -54,22 +69,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.ElevatorSimulator.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "move-dummy-object",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.ElevatorSimulator.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;move-dummy-object&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ElevatorSimulator" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
