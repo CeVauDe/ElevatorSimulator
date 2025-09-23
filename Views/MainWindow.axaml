@@ -14,7 +14,22 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    
+    <!-- <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
+    <StackPanel>
+        <Button Click="Button_OnClick">Calculate</Button>
+        <Canvas x:Name="MainCanvas">
+            <Ellipse x:Name="MyCircle"
+                     Width="50" Height="50"
+                     Fill="MintCream"
+                     Canvas.Left="100"
+                     Canvas.Top="100"/>
+            <Image x:Name="MyImage"
+                   Width="50" Height="50"
+                   Source="avares://ElevatorSimulator/Assets/DVD_logo.svg.png"
+                   Canvas.Left="100"
+                   Canvas.Top="100"/>
+        </Canvas>
+    </StackPanel>
 
 </Window>
