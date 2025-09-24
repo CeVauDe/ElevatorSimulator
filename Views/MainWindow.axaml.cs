@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
@@ -15,9 +16,7 @@ public partial class MainWindow : Window
     private double _startX, _startY, _endX, _endY, _t;
     private const double Duration = 1.0; // seconds
     private const double Interval = 0.016; // ~60 FPS
-
-
-
+    
     private Point[] spawn = new Point[]
     {
         new Point(200, 100),
@@ -26,7 +25,7 @@ public partial class MainWindow : Window
         new Point(200, 400)
     };
     
-    private Point[] queue = new Point[]
+    private Point[] despawn = new Point[]
     {
         new Point(400, 100),
         new Point(400, 200),
@@ -54,28 +53,23 @@ public partial class MainWindow : Window
         Canvas.SetTop(circle, spawn[etage].Y);
         MySymbol.Children.Add(circle);
         circles.Add(circle);
-        MoveSymbol(circle, queue[etage]);
+        MoveSymbol(circle, despawn[etage]);
     }
 
     private void MoveSymbol(Ellipse circle, Point goal)
     {
-        double x = Canvas.GetLeft(circle);
-        double y = Canvas.GetTop(circle);
-        StartLerp(circle, x, y, goal.X, goal.Y);
+        Point start = new Point (Canvas.GetLeft(circle), Canvas.GetTop(circle));
+
+        StartLerp(circle, start, goal);
     }
 
-    private void StartLerp(Ellipse circle, double fromX, double fromY, double toX, double toY)
+    private void StartLerp(Ellipse circle, Point start, Point goal)
     {
         
         double t = 0;
         double duration = 1000.0;       // Dauer in Sekunden?
         double interval = 0.016;        // ~60 FPS
-        
-        
-        _startX = fromX;
-        _startY = fromY;
-        _endX = toX;
-        _endY = toY;
+
         _t = 0;
 
         var timer = new DispatcherTimer
@@ -85,24 +79,18 @@ public partial class MainWindow : Window
         
         _timer.Tick += (spawn, e) =>
         {
-            
-            
             t += interval / duration;
             if (t >= 1)
             {
                 t = 1;
                 timer.Stop();
-                // Kreis entfernen, wenn Ziel erreicht
+
                 MySymbol.Children.Remove(circle);
                 circles.Remove(circle);
             }
-            else
-            {
-                Console.WriteLine(t);
-            }
-
-            double newX = Lerp(fromX, toX, t);
-            double newY = Lerp(fromY, toY, t);
+            
+            double newX = Lerp(start.X, goal.X, t);
+            double newY = Lerp(start.Y, goal.Y, t);
 
             Canvas.SetLeft(circle, newX);
             Canvas.SetTop(circle, newY);
