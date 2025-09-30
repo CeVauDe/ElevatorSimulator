@@ -3,34 +3,100 @@
         xmlns:vm="using:ElevatorSimulator.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
         x:Class="ElevatorSimulator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="ElevatorSimulator">
+        Title="Elevator Simulator">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-    
-    <StackPanel>
-        <Button Command="{Binding MoveSymbolCommand}" 
-                IsEnabled="{Binding !IsAnimating}">Calculate</Button>
-        <Canvas x:Name="MainCanvas">
-            <Canvas x:Name="MySymbol"
-                    Canvas.Left="{Binding SymbolX}"
-                    Canvas.Top="{Binding SymbolY}">
-                <Ellipse x:Name="DvdBackground"
-                         Width="50" Height="50"
-                         Fill="MintCream"/>
-                <Image x:Name="DvdImage"
-                       Width="50" Height="50"
-                       Source="avares://ElevatorSimulator/Assets/DVD_logo.svg.png"/>
-            </Canvas>
-            
-        </Canvas>
-    </StackPanel>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Controls -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10" Margin="0,0,0,20">
+            <Button Command="{Binding SpawnPersonCommand}">Spawn Person</Button>
+            <Button Command="{Binding TogglePauseCommand}" Content="{Binding PauseButtonText}"/>
+            <TextBlock Text="{Binding Greeting}" VerticalAlignment="Center" Margin="20,0,0,0"/>
+        </StackPanel>
+
+        <!-- Simulation Area -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Elevator Visualization -->
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="2" Padding="10">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Elevator" FontWeight="Bold" FontSize="16"/>
+                    <TextBlock>
+                        <Run Text="Floor: "/>
+                        <Run Text="{Binding ElevatorFloor}" FontWeight="Bold"/>
+                    </TextBlock>
+                    <TextBlock>
+                        <Run Text="State: "/>
+                        <Run Text="{Binding ElevatorState}" FontWeight="Bold"/>
+                    </TextBlock>
+                    <TextBlock>
+                        <Run Text="Passengers: "/>
+                        <Run Text="{Binding PassengerCount}" FontWeight="Bold"/>
+                    </TextBlock>
+
+                    <Separator Margin="0,10"/>
+
+                    <!-- Riding Persons -->
+                    <TextBlock Text="In Elevator:" FontWeight="Bold"/>
+                    <ItemsControl ItemsSource="{Binding RidingPersons}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="Person "/>
+                                    <Run Text="{Binding Id}"/>
+                                    <Run Text=" → Floor "/>
+                                    <Run Text="{Binding TargetFloor}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <!-- Waiting Persons -->
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="2" Padding="10" Margin="20,0,0,0">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Waiting Persons" FontWeight="Bold" FontSize="16"/>
+
+                    <ItemsControl ItemsSource="{Binding WaitingPersons}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5" Margin="0,2">
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <Run Text="Person "/>
+                                            <Run Text="{Binding Id}" FontWeight="Bold"/>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Run Text="At Floor "/>
+                                            <Run Text="{Binding CurrentFloor}"/>
+                                            <Run Text=" → Floor "/>
+                                            <Run Text="{Binding TargetFloor}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
 
 </Window>
