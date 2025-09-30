@@ -37,13 +37,13 @@ public class ElevatorTests
     }
 
     [Fact]
-    public void MoveToFloor_ToCurrentFloor_ShouldStayIdle()
+    public void MoveToFloor_ToCurrentFloor_ShouldOpenDoors()
     {
         var elevator = new Elevator(totalFloors: 10) { CurrentFloor = 5 };
 
         elevator.MoveToFloor(5);
 
-        Assert.Equal(ElevatorState.Idle, elevator.State);
+        Assert.Equal(ElevatorState.DoorsOpen, elevator.State);
     }
 
     [Fact]

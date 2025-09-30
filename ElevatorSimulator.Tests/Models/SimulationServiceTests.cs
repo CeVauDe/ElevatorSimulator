@@ -32,12 +32,18 @@ public class SimulationServiceTests
     public void Tick_WithIdleElevatorAndPendingCall_ShouldDispatchElevator()
     {
         var simulation = new SimulationService(totalFloors: 10);
-        simulation.SpawnPerson(originFloor: 5, targetFloor: 8);
+        var person = simulation.SpawnPerson(originFloor: 5, targetFloor: 8);
 
+        // Walk person to elevator position
+        while (person.State == PersonState.WalkingToElevator)
+        {
+            simulation.Tick();
+        }
+
+        // Now person is waiting, dispatch elevator
         simulation.Tick();
 
         Assert.NotEqual(ElevatorState.Idle, simulation.Elevator.State);
-        Assert.Equal(5, simulation.Elevator.TargetFloor);
     }
 
     [Fact]

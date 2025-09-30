@@ -3,11 +3,12 @@
         xmlns:vm="using:ElevatorSimulator.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
         x:Class="ElevatorSimulator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Elevator Simulator">
+        Title="Elevator Simulator"
+        Width="900" Height="600">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -20,20 +21,28 @@
         </Grid.RowDefinitions>
 
         <!-- Controls -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10" Margin="0,0,0,20">
-            <Button Command="{Binding SpawnPersonCommand}">Spawn Person</Button>
-            <Button Command="{Binding TogglePauseCommand}" Content="{Binding PauseButtonText}"/>
-            <TextBlock Text="{Binding Greeting}" VerticalAlignment="Center" Margin="20,0,0,0"/>
-        </StackPanel>
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Left">
+                <Button Command="{Binding SpawnPersonCommand}">Spawn Person</Button>
+                <Button Command="{Binding TogglePauseCommand}" Content="{Binding PauseButtonText}"/>
+                <TextBlock Text="{Binding Greeting}" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            </StackPanel>
+            <TextBlock Text="{Binding AverageTickDuration}"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontFamily="Consolas"
+                       Foreground="Gray"/>
+        </Grid>
 
         <!-- Simulation Area -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Elevator Visualization -->
+            <!-- Elevator Status Panel -->
             <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="2" Padding="10">
                 <StackPanel Spacing="10">
                     <TextBlock Text="Elevator" FontWeight="Bold" FontSize="16"/>
@@ -57,10 +66,10 @@
                     <ItemsControl ItemsSource="{Binding RidingPersons}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock>
-                                    <Run Text="Person "/>
+                                <TextBlock FontSize="11">
+                                    <Run Text="P"/>
                                     <Run Text="{Binding Id}"/>
-                                    <Run Text=" → Floor "/>
+                                    <Run Text=" → "/>
                                     <Run Text="{Binding TargetFloor}"/>
                                 </TextBlock>
                             </DataTemplate>
@@ -69,24 +78,24 @@
                 </StackPanel>
             </Border>
 
-            <!-- Waiting Persons -->
-            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="2" Padding="10" Margin="20,0,0,0">
+            <!-- Waiting Persons List -->
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="2" Padding="10" Margin="10,0">
                 <StackPanel Spacing="10">
-                    <TextBlock Text="Waiting Persons" FontWeight="Bold" FontSize="16"/>
+                    <TextBlock Text="Waiting" FontWeight="Bold" FontSize="16"/>
 
                     <ItemsControl ItemsSource="{Binding WaitingPersons}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5" Margin="0,2">
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="3" Margin="0,2">
                                     <StackPanel>
-                                        <TextBlock>
+                                        <TextBlock FontSize="11">
                                             <Run Text="Person "/>
                                             <Run Text="{Binding Id}" FontWeight="Bold"/>
                                         </TextBlock>
-                                        <TextBlock>
-                                            <Run Text="At Floor "/>
+                                        <TextBlock FontSize="10">
+                                            <Run Text="Floor "/>
                                             <Run Text="{Binding CurrentFloor}"/>
-                                            <Run Text=" → Floor "/>
+                                            <Run Text=" → "/>
                                             <Run Text="{Binding TargetFloor}"/>
                                         </TextBlock>
                                     </StackPanel>
@@ -95,6 +104,47 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
+            </Border>
+
+            <!-- Building Visualization -->
+            <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="2" Padding="10" Background="White">
+                <Canvas Width="450" Height="400" Background="White">
+                    <!-- Draw Floors (4 floors, floor 0 at bottom) -->
+                    <Rectangle Canvas.Left="0" Canvas.Top="300" Width="450" Height="100"
+                               Stroke="Black" StrokeThickness="2" Fill="LightGray" Opacity="0.3"/>
+                    <TextBlock Canvas.Left="5" Canvas.Top="305" Text="Floor 0" FontWeight="Bold" Foreground="Black"/>
+
+                    <Rectangle Canvas.Left="0" Canvas.Top="200" Width="450" Height="100"
+                               Stroke="Black" StrokeThickness="2" Fill="LightGray" Opacity="0.3"/>
+                    <TextBlock Canvas.Left="5" Canvas.Top="205" Text="Floor 1" FontWeight="Bold" Foreground="Black"/>
+
+                    <Rectangle Canvas.Left="0" Canvas.Top="100" Width="450" Height="100"
+                               Stroke="Black" StrokeThickness="2" Fill="LightGray" Opacity="0.3"/>
+                    <TextBlock Canvas.Left="5" Canvas.Top="105" Text="Floor 2" FontWeight="Bold" Foreground="Black"/>
+
+                    <Rectangle Canvas.Left="0" Canvas.Top="0" Width="450" Height="100"
+                               Stroke="Black" StrokeThickness="2" Fill="LightGray" Opacity="0.3"/>
+                    <TextBlock Canvas.Left="5" Canvas.Top="5" Text="Floor 3" FontWeight="Bold" Foreground="Black"/>
+
+                    <!-- Elevator Shaft -->
+                    <Rectangle Canvas.Left="180" Canvas.Top="0" Width="90" Height="400"
+                               Stroke="DarkGray" StrokeThickness="3" Fill="LightGray"/>
+
+                    <!-- Elevator Car -->
+                    <Rectangle Canvas.Left="185" Canvas.Top="{Binding ElevatorY}"
+                               Width="80" Height="90"
+                               Fill="SteelBlue" Stroke="DarkSlateGray" StrokeThickness="2"/>
+
+                    <!-- Status Light (top right of elevator) -->
+                    <Ellipse Canvas.Left="255" Canvas.Top="{Binding ElevatorY}"
+                             Width="10" Height="10"
+                             Fill="{Binding StatusLightColor}"/>
+
+                    <!-- Persons - Using manual rendering approach -->
+                    <Canvas x:Name="PersonsCanvas">
+                        <!-- Persons will be rendered here via code-behind -->
+                    </Canvas>
+                </Canvas>
             </Border>
         </Grid>
     </Grid>

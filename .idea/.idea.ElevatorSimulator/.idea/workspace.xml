@@ -9,10 +9,15 @@
   <component name="ChangeListManager">
     <list default="true" id="53fc2d0a-5e25-4cb0-827e-4161f6e542d9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ElevatorSimulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ElevatorSimulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ElevatorSimulator.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ElevatorSimulator.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ElevatorSimulator.sln" beforeDir="false" afterPath="$PROJECT_DIR$/ElevatorSimulator.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ElevatorSimulator.Tests/Models/ElevatorTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ElevatorSimulator.Tests/Models/ElevatorTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ElevatorSimulator.Tests/Models/PersonTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ElevatorSimulator.Tests/Models/PersonTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ElevatorSimulator.Tests/Models/SimulationServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ElevatorSimulator.Tests/Models/SimulationServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Elevator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Elevator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Person.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Person.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/SimulationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/SimulationService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="move-dummy-object" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,22 +72,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Project.ElevatorSimulator.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;move-dummy-object&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Project.ElevatorSimulator.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "claude-coding",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ElevatorSimulator" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -116,7 +121,7 @@
       <option name="presentableId" value="Default" />
       <updated>1758648959186</updated>
       <workItem from="1758648960376" duration="2147000" />
-      <workItem from="1759253199349" duration="3644000" />
+      <workItem from="1759253199349" duration="10217000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -150,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758658935401</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Implement initial elevator simulation">
+      <option name="closed" value="true" />
+      <created>1759256985555</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1759256985555</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,7 +199,8 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="feat: Add button to move DVD symbol" />
     <MESSAGE value="refactor: to follow MVVM pattern" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: to follow MVVM pattern" />
+    <MESSAGE value="Implement initial elevator simulation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement initial elevator simulation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

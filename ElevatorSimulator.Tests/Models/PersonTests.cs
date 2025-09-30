@@ -12,7 +12,8 @@ public class PersonTests
         Assert.Equal(1, person.Id);
         Assert.Equal(2, person.CurrentFloor);
         Assert.Equal(5, person.TargetFloor);
-        Assert.Equal(PersonState.Waiting, person.State);
+        Assert.Equal(PersonState.WalkingToElevator, person.State);
+        Assert.Equal(0, person.XPosition);
     }
 
     [Fact]
