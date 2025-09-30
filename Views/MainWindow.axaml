@@ -17,20 +17,13 @@
     
     <!-- <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
     <StackPanel>
-        <Button Click="Button_OnClick">Calculate</Button>
+        <Button Click="Button_OnClick_Spawn">Spawn</Button>
+        <Button Click="Button_OnClick_Move">Move</Button>
         <Canvas x:Name="MainCanvas">
             <Canvas x:Name="MySymbol"
                     Canvas.Left="100"
                     Canvas.Top="100">
-                <!--  <Ellipse x:Name="DvdBackground"
-                         Width="50" Height="50"
-                         Fill="MintCream"/>
-                <Image x:Name="DvdImage"
-                       Width="50" Height="50"
-                       Source="avares://ElevatorSimulator/Assets/DVD_logo.svg.png"/> -->
             </Canvas>
-            
         </Canvas>
     </StackPanel>
-
 </Window>
