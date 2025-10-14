@@ -7,9 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53fc2d0a-5e25-4cb0-827e-4161f6e542d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ElevatorSimulator/.idea/avalonia.xml" afterDir="false" />
-    </list>
+    <list default="true" id="53fc2d0a-5e25-4cb0-827e-4161f6e542d9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,49 +19,64 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="move-dummy-object" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="MIXED" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "CeVauDe"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;CeVauDe&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
-    "url": "git@github.com:CeVauDe/ElevatorSimulator.git",
-    "accountId": "a1893b0b-202b-4d85-9392-1fe9062e152c"
+    "url": "https://github.com/CeVauDe/ElevatorSimulator.git",
+    "accountId": "e89122a6-e20e-433f-8d20-e715dca72460"
   }
 }]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/fd6843291c494dcf98f81205c7f337ef1f9000/aa/cef02e35/InputElement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Models/AnimatedSymbol.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Models/AnimationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/ViewModels/MainWindowViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/ViewModels/MainWindowViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/Views/MainWindow.axaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/Views/MainWindow.axaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/Views/MainWindow.axaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/christian/repos/ElevatorSimulator/Views/MainWindow.axaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file:///tmp/JetBrainsPerUserTemp-1000-1/SourceGeneratedDocuments/9E1DAFD4484166796F9D2851/CommunityToolkit.Mvvm.SourceGenerators/CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator/ElevatorSimulator.ViewModels.MainWindowViewModel.g.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="336sfPJI4uP4JvkrRyGRDIOUrY9" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.ElevatorSimulator.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "setup-ide",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.ElevatorSimulator.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;claude-coding&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ElevatorSimulator" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -97,6 +110,7 @@
       <option name="presentableId" value="Default" />
       <updated>1758648959186</updated>
       <workItem from="1758648960376" duration="2147000" />
+      <workItem from="1759253199349" duration="10217000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -114,7 +128,31 @@
       <option name="project" value="LOCAL" />
       <updated>1758649672891</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: Add button to move DVD symbol">
+      <option name="closed" value="true" />
+      <created>1758654552999</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1758654552999</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactor: to follow MVVM pattern">
+      <option name="closed" value="true" />
+      <created>1758658935401</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1758658935401</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Implement initial elevator simulation">
+      <option name="closed" value="true" />
+      <created>1759256985555</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1759256985555</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +186,10 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="feat: Add button to move DVD symbol" />
+    <MESSAGE value="refactor: to follow MVVM pattern" />
+    <MESSAGE value="Implement initial elevator simulation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement initial elevator simulation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

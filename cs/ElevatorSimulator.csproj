@@ -6,11 +6,18 @@
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Models\"/>
         <AvaloniaResource Include="Assets\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="ElevatorSimulator.Tests\**" />
+        <EmbeddedResource Remove="ElevatorSimulator.Tests\**" />
+        <None Remove="ElevatorSimulator.Tests\**" />
     </ItemGroup>
 
     <ItemGroup>
