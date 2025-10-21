@@ -9,7 +9,10 @@ packages = ["env_tutorial"]
 name = "env_tutorial"
 version = "0.0.1"
 dependencies = [
-  "gymnasium",
+  "gymnasium[other]",
   "pygame>=2.1.3",
   "pre-commit",
+  "tqdm>=4.67.1",
+  "matplotlib>=3.10.7",
+  "pyqt6>=6.9.1",
 ]
