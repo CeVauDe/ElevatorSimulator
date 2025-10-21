@@ -1,4 +1,6 @@
 from collections import defaultdict
+from typing import Any
+
 import gymnasium as gym
 from gymnasium.wrappers import RecordEpisodeStatistics, RecordVideo
 import numpy as np
@@ -8,7 +10,7 @@ from matplotlib import pyplot as plt
 import env_tutorial.envs
 
 
-class GridWorldAgent:
+class ElevatorSimAgent:
     def __init__(
         self,
         env: gym.Env,
@@ -52,7 +54,7 @@ class GridWorldAgent:
             action: 0 (stand) or 1 (hit)
         """
         # Convert observation dict to hashable tuple for Q-table lookup
-        obs_key = (tuple(obs["agent"]), tuple(obs["target"]))
+        obs_key = self._get_obs_key(obs)
 
         # With probability epsilon: explore (random action)
         if np.random.random() < self.epsilon:
@@ -61,6 +63,11 @@ class GridWorldAgent:
         # With probability (1-epsilon): exploit (best known action)
         else:
             return int(np.argmax(self.q_values[obs_key]))
+
+    @staticmethod
+    def _get_obs_key(obs: dict[str, np.ndarray[tuple[Any, ...], np.dtype[Any]]]) -> tuple[
+        tuple[tuple[Any, ...], ...], tuple[tuple[Any, ...], ...], tuple[tuple[Any, ...], ...]]:
+        return (tuple(obs["elevator"]), tuple(obs["current_elevator_target"]), tuple(obs["target"]))
 
     def update(
         self,
@@ -75,8 +82,8 @@ class GridWorldAgent:
         This is the heart of Q-learning: learn from (state, action, reward, next_state)
         """
         # Convert observation dicts to hashable tuples for Q-table lookup
-        obs_key = (tuple(obs["agent"]), tuple(obs["target"]))
-        next_obs_key = (tuple(next_obs["agent"]), tuple(next_obs["target"]))
+        obs_key = self._get_obs_key(obs)
+        next_obs_key = self._get_obs_key(next_obs)
 
         # What's the best we could do from the next state?
         # (Zero if episode terminated - no future rewards possible)
@@ -105,26 +112,26 @@ class GridWorldAgent:
 if __name__ == "__main__":
     # Training hyperparameters
     learning_rate = 0.01  # How fast to learn (higher = faster but less stable)
-    n_episodes = 100_000  # Number of hands to practice
+    n_episodes = 10_000  # Number of hands to practice
     start_epsilon = 1.0  # Start with 100% random actions
     epsilon_decay = start_epsilon / (n_episodes / 2)  # Reduce exploration over time
     final_epsilon = 0.1  # Always keep some exploration
 
     num_eval_episodes = 4
 
-    env = env_tutorial.envs.GridWorldEnv(render_mode="rgb_array")
+    env = env_tutorial.envs.ElevatorSimEnv(render_mode="rgb_array", num_floors=10)
     # Add video recording for every episode
     env = RecordVideo(
         env,
         video_folder="gridworld-agent",  # Folder to save videos
         name_prefix="eval",  # Prefix for video filenames
-        episode_trigger=lambda x: (x % 1000) == 0  # Record every episode
+        episode_trigger=lambda x: (x % 100) == 0  # Record every episode
     )
 
     # Add episode statistics tracking
     env = RecordEpisodeStatistics(env, buffer_length=num_eval_episodes)
 
-    agent = GridWorldAgent(
+    agent = ElevatorSimAgent(
         env=env,
         learning_rate=learning_rate,
         initial_epsilon=start_epsilon,

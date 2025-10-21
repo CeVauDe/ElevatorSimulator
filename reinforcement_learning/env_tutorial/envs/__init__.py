@@ -1,1 +1,1 @@
-from env_tutorial.envs.grid_world import GridWorldEnv
+from env_tutorial.envs.elevator_sim import ElevatorSimEnv
