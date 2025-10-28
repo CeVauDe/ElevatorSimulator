@@ -17,4 +17,5 @@ dependencies = [
   "pyqt6>=6.9.1",
   "ruff>=0.14.2",
   "pydantic>=2.12.3",
+  "pydantic-numpy>=8.0.1",
 ]
