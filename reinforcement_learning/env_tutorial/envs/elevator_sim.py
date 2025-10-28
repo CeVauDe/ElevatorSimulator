@@ -178,20 +178,29 @@ class ElevatorSimEnv(gym.Env):
             pix_square_size / 3,
         )
 
-        # Finally, add some gridlines
+        # 2 vertical lines
+        pygame.draw.line(
+            canvas,
+            0,
+            (pix_square_size * (elevator_column - 0.5), 0),
+            (pix_square_size * (elevator_column - 0.5), self.window_size),
+            width=3,
+        )
+        pygame.draw.line(
+            canvas,
+            0,
+            (pix_square_size * (elevator_column + 0.5), 0),
+            (pix_square_size * (elevator_column + 0.5), self.window_size),
+            width=3,
+        )
+
+        # Horizontal lines
         for x in range(self.num_floors + 1):
             pygame.draw.line(
                 canvas,
                 0,
                 (0, pix_square_size * x),
                 (self.window_size, pix_square_size * x),
-                width=3,
-            )
-            pygame.draw.line(
-                canvas,
-                0,
-                (pix_square_size * x, 0),
-                (pix_square_size * x, self.window_size),
                 width=3,
             )
 
