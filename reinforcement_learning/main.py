@@ -7,7 +7,7 @@ import numpy as np
 from tqdm import tqdm
 from matplotlib import pyplot as plt
 
-import env_tutorial.envs
+import envs.elevator_sim
 
 
 class ElevatorSimAgent:
@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
     num_eval_episodes = 1_000
 
-    env = env_tutorial.envs.ElevatorSimEnv(render_mode="rgb_array", num_floors=10)
+    env = envs.envs.ElevatorSimEnv(render_mode="rgb_array", num_floors=10)
     # Add video recording for every episode
     env = RecordVideo(
         env,
