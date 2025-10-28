@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from gymnasium.wrappers import RecordEpisodeStatistics, RecordVideo
 import numpy as np
 from tqdm import tqdm
@@ -10,7 +12,7 @@ from elevator_sim.agents import QTableAgent
 if __name__ == "__main__":
     # Training hyperparameters
     learning_rate = 0.01  # How fast to learn (higher = faster but less stable)
-    n_episodes = 10_000  # Number of episodes to practice
+    n_episodes = 10  # Number of episodes to practice
     start_epsilon = 1.0  # Start with 100% random actions
     epsilon_decay = start_epsilon / (n_episodes / 2)  # Reduce exploration over time
     final_epsilon = 0.0  # Always keep some exploration
@@ -60,6 +62,10 @@ if __name__ == "__main__":
 
         # Reduce exploration rate (agent becomes less random over time)
         agent.decay_epsilon()
+
+    agent.save(Path(__file__).parent / "agents" / "q_table_agent.json")
+
+    loaded_agent = QTableAgent.load('agents/q_table_agent.json', env)
 
     # Print summary statistics
     print(f'\nEvaluation Summary:')
