@@ -1,1 +1,1 @@
-from q_table_agent import QTableAgent
+from .q_table_agent import QTableAgent
