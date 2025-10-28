@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # Add video recording for every episode
     env = RecordVideo(
         env,
-        video_folder="gridworld-agent",  # Folder to save videos
+        video_folder="qtable-agent",  # Folder to save videos
         name_prefix="eval",  # Prefix for video filenames
         episode_trigger=lambda x: x in [0, 1, 2, n_episodes - 2] # Record first and last episodes
     )
