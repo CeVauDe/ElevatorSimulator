@@ -112,12 +112,12 @@ class ElevatorSimAgent:
 if __name__ == "__main__":
     # Training hyperparameters
     learning_rate = 0.01  # How fast to learn (higher = faster but less stable)
-    n_episodes = 10_000  # Number of hands to practice
+    n_episodes = 10_000  # Number of episodes to practice
     start_epsilon = 1.0  # Start with 100% random actions
     epsilon_decay = start_epsilon / (n_episodes / 2)  # Reduce exploration over time
-    final_epsilon = 0.1  # Always keep some exploration
+    final_epsilon = 0.0  # Always keep some exploration
 
-    num_eval_episodes = 4
+    num_eval_episodes = 1_000
 
     env = env_tutorial.envs.ElevatorSimEnv(render_mode="rgb_array", num_floors=10)
     # Add video recording for every episode
@@ -125,7 +125,7 @@ if __name__ == "__main__":
         env,
         video_folder="gridworld-agent",  # Folder to save videos
         name_prefix="eval",  # Prefix for video filenames
-        episode_trigger=lambda x: (x % 100) == 0  # Record every episode
+        episode_trigger=lambda x: x in [0, 1, 2, n_episodes - 2] # Record first and last episodes
     )
 
     # Add episode statistics tracking
@@ -162,32 +162,6 @@ if __name__ == "__main__":
 
         # Reduce exploration rate (agent becomes less random over time)
         agent.decay_epsilon()
-
-    def get_moving_avgs(arr, window, convolution_mode):
-        """Compute moving average to smooth noisy data."""
-        return np.convolve(
-            np.array(arr).flatten(),
-            np.ones(window),
-            mode=convolution_mode
-        ) / window
-
-
-    # Smooth over a 500-episode window
-    rolling_length = 500
-    fig, axs = plt.subplots(ncols=3, figsize=(12, 5))
-
-    # Training error (how much we're still learning)
-    axs[2].set_title("Training Error")
-    training_error_moving_average = get_moving_avgs(
-        agent.training_error,
-        rolling_length,
-        "same"
-    )
-    axs[2].plot(range(len(training_error_moving_average)), training_error_moving_average)
-    axs[2].set_ylabel("Temporal Difference Error")
-    axs[2].set_xlabel("Step")
-
-    plt.tight_layout()
 
     # Print summary statistics
     print(f'\nEvaluation Summary:')

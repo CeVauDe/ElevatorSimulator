@@ -12,6 +12,7 @@ class ElevatorSimEnv(gym.Env):
     def __init__(self, render_mode=None, num_floors=5):
         self.num_floors = num_floors  # The number of floors of the building
         self.window_size = 512  # The size of the PyGame window
+        self.elevator_speed = 0.25 # Floors per step
         self.current_step = 0
         self.direction = 0
 
@@ -26,7 +27,7 @@ class ElevatorSimEnv(gym.Env):
             }
         )
 
-        # We have actions equivalent to the number of floors
+        # We have actions equivalent to the number of floors + 1 for no change
         self.action_space = spaces.Discrete(self.num_floors + 1, start=-1)
 
         assert render_mode is None or render_mode in self.metadata["render_modes"]
@@ -43,12 +44,12 @@ class ElevatorSimEnv(gym.Env):
         self.clock = None
 
     def _get_obs(self):
-        return {"elevator": self._elevator_location, "current_elevator_target": self._current_elevator_target, "target": self._target_location}
+        return {"elevator": self._elevator_position, "current_elevator_target": self._current_elevator_target, "target": self._target_floor}
 
     def _get_info(self):
         return {
             "distance": np.linalg.norm(
-                self._elevator_location - self._target_location, ord=1
+                self._elevator_position - self._target_floor, ord=1
             )
         }
 
@@ -57,16 +58,18 @@ class ElevatorSimEnv(gym.Env):
         super().reset(seed=seed)
 
         # Choose the agent's location uniformly at random
-        self._elevator_location = self.np_random.integers(0, self.num_floors, size=1, dtype=int)
+        self._elevator_position = self.np_random.integers(0, self.num_floors, size=1, dtype=int)
         self._current_elevator_target = np.array([-1])  # No target at the beginning
 
         # We will sample the target's location randomly until it does not
         # coincide with the agent's location
-        self._target_location = self._elevator_location
-        while np.array_equal(self._target_location, self._elevator_location):
-            self._target_location = self.np_random.integers(
+        self._target_floor = self._elevator_position
+        while np.array_equal(self._target_floor, self._elevator_position):
+            self._target_floor = self.np_random.integers(
                 0, self.num_floors, size=1, dtype=int
             )
+
+        self._initial_distance = np.abs(self._elevator_position - self._target_floor)
 
         self.current_step = 0
         self.direction = 0
@@ -81,27 +84,31 @@ class ElevatorSimEnv(gym.Env):
 
     def step(self, action):
         if action != -1:
-            self.direction = np.sign(action - self._elevator_location)
+            self.direction = np.sign(action - self._elevator_position)
 
         # We use `np.clip` to make sure we don't leave the grid
-        self._elevator_location = np.clip(
-            self._elevator_location + 0.25 * self.direction, 0, self.num_floors - 1
+        self._elevator_position = np.clip(
+            self._elevator_position + self.elevator_speed * self.direction, 0, self.num_floors - 1
         )
-        # An episode is done iff the agent has reached the target
-        terminated = np.array_equal(self._elevator_location, self._target_location)
+        # An episode is done if the agent has reached the target
+        terminated = np.array_equal(self._elevator_position, self._target_floor)
 
-        # Non-linear reward function (exponential decay with distance)
-        distance = np.abs(self._elevator_location[0] - self._target_location[0])
+        distance = np.abs(self._elevator_position[0] - self._target_floor[0])
         max_distance = self.num_floors - 1
 
-        # Option 1: Exponential reward (very close = much better)
-        reward = np.exp(-2 * distance / max_distance) - 1
+        reward = 1 if self._target_floor[0] == action else -1  # Reward for choosing the correct floor
+
         # Add bonus for reaching target
         if terminated:
-            reward += 10  # Large bonus for reaching the goal
+            reward += 10 / (self.current_step / self._initial_distance / self.elevator_speed) # Large bonus for reaching the goal
 
         if action == -1:
-            reward += 1  # Small bonus for not changing the direction
+            reward += 3  # Small bonus for not changing the direction
+
+            # initial distance | steps taken | reward
+            #       5          |      5      |  10 / (5/5) = 10
+            #       5          |     10      |  10 / (5/10) = 5
+            #       5          |     20      |  10 / (5/20) = 2.5
 
         observation = self._get_obs()
         info = self._get_info()
@@ -119,6 +126,22 @@ class ElevatorSimEnv(gym.Env):
         if self.render_mode == "rgb_array":
             return self._render_frame()
 
+    @staticmethod
+    def _draw_top_right_text(surface, text, size=24, color=(0, 0, 0), padding=10, font_name=None):
+        """
+        Draw `text` in the top-right corner of `surface`.
+        """
+        # Ensure font module is initialized (usually already after pygame.init())
+        if not pygame.font.get_init():
+            pygame.font.init()
+
+        font_path = pygame.font.match_font(font_name)
+
+        font = pygame.font.Font(font_path, size)  # font_name=None uses default font
+        text_surf = font.render(text, True, color)
+        rect = text_surf.get_rect(topright=(surface.get_width() - padding, padding))
+        surface.blit(text_surf, rect)
+
     def _render_frame(self):
         if self.window is None and self.render_mode == "human":
             pygame.init()
@@ -127,14 +150,16 @@ class ElevatorSimEnv(gym.Env):
         if self.clock is None and self.render_mode == "human":
             self.clock = pygame.time.Clock()
 
+        elevator_column = self.num_floors / 2
+
         canvas = pygame.Surface((self.window_size, self.window_size))
         canvas.fill((255, 255, 255))
         pix_square_size = (
             self.window_size / self.num_floors
         )  # The size of a single grid square in pixels
 
-        # First we draw the target
-        target = np.array([1, self._target_location[0]])
+        # First we draw the elevator
+        target = np.array([elevator_column - 0.5, self._elevator_position[0]])
         pygame.draw.rect(
             canvas,
             (255, 0, 0),
@@ -143,8 +168,9 @@ class ElevatorSimEnv(gym.Env):
                 (pix_square_size, pix_square_size),
             ),
         )
-        # Now we draw the agent
-        center = np.array([1, self._elevator_location[0]])
+
+        # Now we draw the target
+        center = np.array([elevator_column - 0.5, self._target_floor[0]])
         pygame.draw.circle(
             canvas,
             (0, 0, 255),
@@ -168,6 +194,14 @@ class ElevatorSimEnv(gym.Env):
                 (pix_square_size * x, self.window_size),
                 width=3,
             )
+
+        # add current step in top-right corner
+        self._draw_top_right_text(
+            canvas,
+            f"Step: {self.current_step:04d}",
+            color=(0, 0 ,0),
+            font_name="0xproto"
+        )
 
         if self.render_mode == "human":
             # The following line copies our drawings from `canvas` to the visible window
